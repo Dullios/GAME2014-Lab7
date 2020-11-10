@@ -26,7 +26,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         _Move();
     }
@@ -58,7 +58,7 @@ public class PlayerBehaviour : MonoBehaviour
             if ((joystick.Vertical > joystickVerticalSensitivity) && (!isJumping))
             {
                 // jump
-                m_rigidBody2D.AddForce(Vector2.up * verticalForce * Time.deltaTime);
+                m_rigidBody2D.AddForce(Vector2.up * verticalForce);
                 m_animator.SetInteger("AnimState", 2);
                 isJumping = true;
             }
