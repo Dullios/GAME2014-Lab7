@@ -8,6 +8,7 @@ TagManager:
   - Fire
   - Platforms
   - Walls
+  - Ramps
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - Platforms
   - Walls
-  - 
+  - Ramps
   - 
   - 
   - 
