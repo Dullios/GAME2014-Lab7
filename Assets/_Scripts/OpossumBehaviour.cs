@@ -24,6 +24,8 @@ public class OpossumBehaviour : MonoBehaviour
     public bool onRamp;
     public RampDirection rampDir;
 
+    public LineOfSight opossumLoS;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,9 +37,22 @@ public class OpossumBehaviour : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (HasLineOfSight())
+            Debug.Log("Opossum can see the player");
         LookForward();
         LookAhead();
         Move();
+    }
+
+    private bool HasLineOfSight()
+    {
+        if (opossumLoS.colliders.Count > 0)
+        {
+            if (opossumLoS.collidesWith.gameObject.name == "Player" && opossumLoS.colliders[0].gameObject.name == "Player")
+                return true;
+        }
+
+        return false;
     }
 
     private void LookForward()
