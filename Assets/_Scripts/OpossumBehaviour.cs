@@ -26,11 +26,16 @@ public class OpossumBehaviour : MonoBehaviour
 
     public LineOfSight opossumLoS;
 
+    [Header("Bullet Firing")]
+    public float fireDelay;
+    public Transform bulletSpawn;
+    public GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
-
+        player = GameObject.FindObjectOfType<PlayerBehaviour>().gameObject;
         rampDir = RampDirection.NONE;
     }
 
@@ -38,7 +43,7 @@ public class OpossumBehaviour : MonoBehaviour
     void FixedUpdate()
     {
         if (HasLineOfSight())
-            Debug.Log("Opossum can see the player");
+            FireBullet();
         LookForward();
         LookAhead();
         Move();
@@ -53,6 +58,18 @@ public class OpossumBehaviour : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void FireBullet()
+    {
+        // delay bullet firing 
+        if (Time.frameCount % 60 == 0 && BulletManager.Instance().HasBullets())
+        {
+            Vector3 playerPosition = player.transform.position;
+            Vector3 fireDir = Vector3.Normalize(playerPosition - bulletSpawn.position);
+
+            BulletManager.Instance().GetBullet(bulletSpawn.position, fireDir);
+        }
     }
 
     private void LookForward()

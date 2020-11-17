@@ -9,12 +9,12 @@ public class LineOfSight : MonoBehaviour
     public ContactFilter2D contactFilter;
     public List<Collider2D> colliders;
 
-    private BoxCollider2D LoSCollider;
+    private PolygonCollider2D LoSCollider;
 
     // Start is called before the first frame update
     void Start()
     {
-        LoSCollider = GetComponent<BoxCollider2D>();
+        LoSCollider = GetComponent<PolygonCollider2D>();
     }
 
     // Update is called once per frame
